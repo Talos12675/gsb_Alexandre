@@ -4,9 +4,12 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
-            <div class="card-header">
-                <h2>Détails du Compte Rendu</h2>
-                <a href="{{ route('rapports.index') }}" class="btn btn-secondary">Retour</a>
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h2 class="mb-0">Détails du Compte Rendu</h2>
+                <div class="btn-group" role="group" aria-label="Actions">
+                    <a href="{{ route('rapports.index') }}" class="btn btn-secondary">Retour</a>
+                    <a href="{{ route('rapports.pdf', ['id' => $rapport->VIS_MATRICULE . '_' . $rapport->RAP_NUM]) }}" class="btn btn-primary" target="_blank">Exporter en PDF</a>
+                </div>
             </div>
             <div class="card-body">
                 <div class="row">

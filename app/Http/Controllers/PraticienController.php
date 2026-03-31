@@ -25,7 +25,7 @@ class PraticienController extends Controller
             });
         }
         
-        $praticiens = $query->paginate(10);
+        $praticiens = $query->get();
         return view('praticiens.index', compact('praticiens'));
     }
 

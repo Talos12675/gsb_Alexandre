@@ -22,6 +22,7 @@ Route::middleware('web')->group(function () {
     Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('rapports', RapportVisiteController::class);
+    Route::get('/rapports/{id}/pdf', [RapportVisiteController::class, 'exportPdf'])->name('rapports.pdf');
     Route::resource('praticiens', PraticienController::class);
     Route::resource('medicaments', MedicamentController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

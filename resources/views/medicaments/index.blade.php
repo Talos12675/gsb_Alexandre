@@ -56,7 +56,6 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $medicaments->appends(request()->query())->links() }}
             </div>
         </div>
     </div>

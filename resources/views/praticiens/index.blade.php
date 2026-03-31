@@ -56,7 +56,6 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $praticiens->appends(request()->query())->links() }}
             </div>
         </div>
     </div>

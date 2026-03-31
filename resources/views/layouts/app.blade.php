@@ -163,6 +163,70 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            padding-bottom: 60px;
+        }
+
+        /* Pagination styling */
+        .pagination {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 8px !important;
+            margin-top: 30px !important;
+            margin-bottom: 0 !important;
+            flex-wrap: wrap !important;
+            list-style: none !important;
+            padding: 0 !important;
+        }
+
+        .page-item {
+            display: inline-block !important;
+            margin: 0 !important;
+        }
+
+        .page-link {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 38px !important;
+            height: 38px !important;
+            padding: 0 !important;
+            min-width: 38px !important;
+            border: 1px solid #ddd !important;
+            border-radius: 8px !important;
+            background-color: #ffffff !important;
+            color: #3498db !important;
+            font-size: 0.9rem !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1) !important;
+            cursor: pointer !important;
+            position: relative !important;
+        }
+
+        .page-link:hover {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+            border-color: #3498db !important;
+            color: #ffffff !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3) !important;
+        }
+
+        .page-item.active .page-link {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+            border-color: #3498db !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4) !important;
+        }
+
+        .page-item.disabled .page-link,
+        .page-item.disabled .page-link:hover {
+            background-color: #f8f9fa !important;
+            border-color: #e9ecef !important;
+            color: #ccc !important;
+            cursor: not-allowed !important;
+            transform: none !important;
+            opacity: 0.6 !important;
         }
 
         .main-content.animated {

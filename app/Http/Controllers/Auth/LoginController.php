@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use App\Models\Visiteur;
 
@@ -24,15 +26,28 @@ class LoginController extends Controller
 
         $visiteur = Visiteur::where('VIS_MATRICULE', $request->matricule)->first();
 
-        if ($visiteur && $request->password == date('Y', strtotime($visiteur->VIS_DATEEMBAUCHE))) {
+        if ($visiteur && Hash::check($request->password, $visiteur->VIS_PASSWORD)) {
             session([
                 'loggedin' => true,
                 'matricule' => $visiteur->VIS_MATRICULE,
                 'nom' => $visiteur->VIS_NOM,
                 'prenom' => $visiteur->VIS_PRENOM,
             ]);
+
+            Log::channel('login')->info('Connexion réussie', [
+                'matricule' => $visiteur->VIS_MATRICULE,
+                'ip' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+            ]);
+
             return redirect()->route('dashboard');
         }
+
+        Log::channel('login')->warning('Échec de connexion', [
+            'matricule' => $request->matricule,
+            'ip' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+        ]);
 
         throw ValidationException::withMessages([
             'matricule' => ['Les informations d\'identification fournies ne correspondent pas à nos enregistrements.'],

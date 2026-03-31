@@ -9,6 +9,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class Visiteur
@@ -51,8 +52,23 @@ class Visiteur extends Model
 		'VIS_VILLE',
 		'VIS_DATEEMBAUCHE',
 		'SEC_CODE',
-		'LAB_CODE'
+		'LAB_CODE',
+		'VIS_PASSWORD',
 	];
+
+	protected $hidden = [
+		'VIS_PASSWORD',
+	];
+
+	public function setVISPasswordAttribute($value)
+	{
+		// Store passwords hashed (but don't double-hash already hashed strings)
+		if ($value !== null && Hash::needsRehash($value)) {
+			$this->attributes['VIS_PASSWORD'] = Hash::make($value);
+		} else {
+			$this->attributes['VIS_PASSWORD'] = $value;
+		}
+	}
 
 	public function labo()
 	{

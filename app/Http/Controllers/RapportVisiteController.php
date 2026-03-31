@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RapportVisite;
 use App\Models\Praticien;
 use App\Models\Visiteur;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class RapportVisiteController extends Controller
@@ -15,7 +16,7 @@ class RapportVisiteController extends Controller
             return redirect('/login');
         }
         
-        $rapports = RapportVisite::where('VIS_MATRICULE', session('matricule'))->with('praticien', 'visiteur')->paginate(10);
+        $rapports = RapportVisite::where('VIS_MATRICULE', session('matricule'))->with('praticien', 'visiteur')->get();
         return view('rapports.index', compact('rapports'));
     }
 
@@ -66,6 +67,25 @@ class RapportVisiteController extends Controller
         }
         $rapport = RapportVisite::where('VIS_MATRICULE', $vis_matricule)->where('RAP_NUM', $rap_num)->firstOrFail();
         return view('rapports.show', compact('rapport'));
+    }
+
+    public function exportPdf($id)
+    {
+        if (!session('loggedin')) {
+            return redirect('/login');
+        }
+
+        [$vis_matricule, $rap_num] = explode('_', $id);
+        if ($vis_matricule !== session('matricule')) {
+            abort(403);
+        }
+        $rapport = RapportVisite::where('VIS_MATRICULE', $vis_matricule)->where('RAP_NUM', $rap_num)->firstOrFail();
+
+        $pdf = Pdf::loadView('rapports.pdf', compact('rapport'))
+            ->setPaper('a4', 'portrait');
+
+        $fileName = sprintf('compte_rendu_%s_%s.pdf', $vis_matricule, $rap_num);
+        return $pdf->download($fileName);
     }
 
     public function edit($id)

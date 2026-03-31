@@ -79,7 +79,7 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="mb-3">
-                <label for="matricule" class="form-label">Numéro de matricule</label>
+                <label for="matricule" class="form-label">Identifiant (matricule)</label>
                 <input type="text" class="form-control" id="matricule" name="matricule" value="{{ old('matricule') }}" required>
                 @error('matricule')
                     <div class="text-danger">{{ $message }}</div>

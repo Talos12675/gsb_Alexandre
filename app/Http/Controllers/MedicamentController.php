@@ -25,7 +25,7 @@ class MedicamentController extends Controller
             });
         }
         
-        $medicaments = $query->paginate(10);
+        $medicaments = $query->get();
         return view('medicaments.index', compact('medicaments'));
     }
 
