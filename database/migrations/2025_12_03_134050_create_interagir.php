@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-Schema::create('interagir', function (Blueprint $table) {
-     $table->string('MED_PERTURBATEUR', 10);
-     $table->string('MED_MED_PERTURBE', 10);
-     $table->primary(['MED_PERTURBATEUR','MED_MED_PERTURBE']);
-     $table->foreign('MED_PERTURBATEUR')->references('MED_DEPOTLEGAL')->on('medicament');
-     $table->foreign('MED_MED_PERTURBE')->references('MED_DEPOTLEGAL')->on('medicament');
- });
+        Schema::create('interagir', function (Blueprint $table) {
+            $table->string('MED_PERTURBATEUR', 10);
+            $table->string('MED_MED_PERTURBE', 10);
+            $table->primary(['MED_PERTURBATEUR', 'MED_MED_PERTURBE']);
+            $table->foreign('MED_PERTURBATEUR')->references('MED_DEPOTLEGAL')->on('medicament');
+            $table->foreign('MED_MED_PERTURBE')->references('MED_DEPOTLEGAL')->on('medicament');
+        });
 
     }
 

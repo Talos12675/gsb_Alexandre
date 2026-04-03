@@ -10,39 +10,38 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Inviter
- * 
+ *
  * @property int $AC_NUM
  * @property int $PRA_NUM
  * @property bool|null $SPECIALISTEON
- * 
  * @property ActiviteCompl $activite_compl
  * @property Praticien $praticien
- *
- * @package App\Models
  */
 class Inviter extends Model
 {
-	protected $table = 'inviter';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'inviter';
 
-	protected $casts = [
-		'AC_NUM' => 'int',
-		'PRA_NUM' => 'int',
-		'SPECIALISTEON' => 'bool'
-	];
+    public $incrementing = false;
 
-	protected $fillable = [
-		'SPECIALISTEON'
-	];
+    public $timestamps = false;
 
-	public function activite_compl()
-	{
-		return $this->belongsTo(ActiviteCompl::class, 'AC_NUM');
-	}
+    protected $casts = [
+        'AC_NUM' => 'int',
+        'PRA_NUM' => 'int',
+        'SPECIALISTEON' => 'bool',
+    ];
 
-	public function praticien()
-	{
-		return $this->belongsTo(Praticien::class, 'PRA_NUM');
-	}
+    protected $fillable = [
+        'SPECIALISTEON',
+    ];
+
+    public function activite_compl()
+    {
+        return $this->belongsTo(ActiviteCompl::class, 'AC_NUM');
+    }
+
+    public function praticien()
+    {
+        return $this->belongsTo(Praticien::class, 'PRA_NUM');
+    }
 }

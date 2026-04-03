@@ -6,7 +6,9 @@
         <div class="card">
             <div class="card-header">
                 <h2>Praticiens</h2>
-                <a href="{{ route('praticiens.create') }}" class="btn btn-primary">Nouveau Praticien</a>
+                @if(session('is_admin'))
+                    <a href="{{ route('praticiens.create') }}" class="btn btn-primary">Nouveau Praticien</a>
+                @endif
             </div>
             <div class="card-body">
                 <!-- Formulaire de recherche -->
@@ -44,12 +46,14 @@
                                 <td>{{ $praticien->TYP_CODE }}</td>
                                 <td>
                                     <a href="{{ route('praticiens.show', $praticien) }}" class="btn btn-sm btn-outline-primary">Voir</a>
+                                @if(session('is_admin'))
                                     <a href="{{ route('praticiens.edit', $praticien) }}" class="btn btn-sm btn-outline-secondary">Éditer</a>
                                     <form method="POST" action="{{ route('praticiens.destroy', $praticien) }}" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Êtes-vous sûr?')">Supprimer</button>
                                     </form>
+                                @endif
                                 </td>
                             </tr>
                             @endforeach

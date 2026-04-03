@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-Schema::create('presentation', function (Blueprint $table) {
-    $table->string('PRE_CODE', 2)->primary();
-    $table->string('PRE_LIBELLE', 20);
-});
+        Schema::create('presentation', function (Blueprint $table) {
+            $table->string('PRE_CODE', 2)->primary();
+            $table->string('PRE_LIBELLE', 20);
+        });
 
     }
 

@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-Schema::create('offrir', function (Blueprint $table) {
-    $table->string('VIS_MATRICULE', 10);
-               $table->foreign('VIS_MATRICULE')->references('VIS_MATRICULE')->on('visiteur');
-               $table->foreign('RAP_NUM')->references('RAP_NUM')->on('rapport_visite');
-               $table->foreign('MED_DEPOTLEGAL')->references('MED_DEPOTLEGAL')->on('medicament');
-    $table->unsignedInteger('RAP_NUM');
-    $table->string('MED_DEPOTLEGAL', 10);
-    $table->smallInteger('OFF_QTE')->nullable();
-    $table->primary(['VIS_MATRICULE','RAP_NUM','MED_DEPOTLEGAL']);
-});
+        Schema::create('offrir', function (Blueprint $table) {
+            $table->string('VIS_MATRICULE', 10);
+            $table->foreign('VIS_MATRICULE')->references('VIS_MATRICULE')->on('visiteur');
+            $table->foreign('RAP_NUM')->references('RAP_NUM')->on('rapport_visite');
+            $table->foreign('MED_DEPOTLEGAL')->references('MED_DEPOTLEGAL')->on('medicament');
+            $table->unsignedInteger('RAP_NUM');
+            $table->string('MED_DEPOTLEGAL', 10);
+            $table->smallInteger('OFF_QTE')->nullable();
+            $table->primary(['VIS_MATRICULE', 'RAP_NUM', 'MED_DEPOTLEGAL']);
+        });
 
     }
 

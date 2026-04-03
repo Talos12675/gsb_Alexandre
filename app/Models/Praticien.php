@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Praticien
- * 
+ *
  * @property string $PRA_NOM
  * @property string $PRA_PRENOM
  * @property string $PRA_ADRESSE
@@ -20,53 +20,53 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $PRA_COEFNOTORIETE
  * @property string $TYP_CODE
  * @property int $PRA_NUM
- * 
  * @property TypePraticien $type_praticien
  * @property Collection|Inviter[] $inviters
  * @property Collection|Posseder[] $posseders
  * @property Collection|RapportVisite[] $rapport_visites
- *
- * @package App\Models
  */
 class Praticien extends Model
 {
-	protected $table = 'praticien';
-	protected $primaryKey = 'PRA_NUM';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'praticien';
 
-	protected $casts = [
-		'PRA_COEFNOTORIETE' => 'float',
-		'PRA_NUM' => 'int'
-	];
+    protected $primaryKey = 'PRA_NUM';
 
-	protected $fillable = [
-		'PRA_NOM',
-		'PRA_PRENOM',
-		'PRA_ADRESSE',
-		'PRA_CP',
-		'PRA_VILLE',
-		'PRA_COEFNOTORIETE',
-		'TYP_CODE'
-	];
+    public $incrementing = false;
 
-	public function type_praticien()
-	{
-		return $this->belongsTo(TypePraticien::class, 'TYP_CODE');
-	}
+    public $timestamps = false;
 
-	public function inviters()
-	{
-		return $this->hasMany(Inviter::class, 'PRA_NUM');
-	}
+    protected $casts = [
+        'PRA_COEFNOTORIETE' => 'float',
+        'PRA_NUM' => 'int',
+    ];
 
-	public function posseders()
-	{
-		return $this->hasMany(Posseder::class, 'PRA_NUM');
-	}
+    protected $fillable = [
+        'PRA_NOM',
+        'PRA_PRENOM',
+        'PRA_ADRESSE',
+        'PRA_CP',
+        'PRA_VILLE',
+        'PRA_COEFNOTORIETE',
+        'TYP_CODE',
+    ];
 
-	public function rapport_visites()
-	{
-		return $this->hasMany(RapportVisite::class, 'PRA_NUM');
-	}
+    public function type_praticien()
+    {
+        return $this->belongsTo(TypePraticien::class, 'TYP_CODE');
+    }
+
+    public function inviters()
+    {
+        return $this->hasMany(Inviter::class, 'PRA_NUM');
+    }
+
+    public function posseders()
+    {
+        return $this->hasMany(Posseder::class, 'PRA_NUM');
+    }
+
+    public function rapport_visites()
+    {
+        return $this->hasMany(RapportVisite::class, 'PRA_NUM');
+    }
 }

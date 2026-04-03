@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-Schema::create('dosage', function (Blueprint $table) {
-    $table->string('DOS_CODE', 10)->primary();
-    $table->string('DOS_QUANTITE', 10);
-    $table->string('DOS_UNITE', 10);
-});
+        Schema::create('dosage', function (Blueprint $table) {
+            $table->string('DOS_CODE', 10)->primary();
+            $table->string('DOS_QUANTITE', 10);
+            $table->string('DOS_UNITE', 10);
+        });
 
     }
 

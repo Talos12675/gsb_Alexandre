@@ -11,38 +11,37 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Travailler
- * 
+ *
  * @property string $VIS_MATRICULE
  * @property Carbon $JJMMAA
  * @property string $REG_CODE
  * @property string $TRA_ROLE
- * 
  * @property Region $region
  * @property Visiteur $visiteur
- *
- * @package App\Models
  */
 class Travailler extends Model
 {
-	protected $table = 'travailler';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'travailler';
 
-	protected $casts = [
-		'JJMMAA' => 'datetime'
-	];
+    public $incrementing = false;
 
-	protected $fillable = [
-		'TRA_ROLE'
-	];
+    public $timestamps = false;
 
-	public function region()
-	{
-		return $this->belongsTo(Region::class, 'REG_CODE');
-	}
+    protected $casts = [
+        'JJMMAA' => 'datetime',
+    ];
 
-	public function visiteur()
-	{
-		return $this->belongsTo(Visiteur::class, 'VIS_MATRICULE');
-	}
+    protected $fillable = [
+        'TRA_ROLE',
+    ];
+
+    public function region()
+    {
+        return $this->belongsTo(Region::class, 'REG_CODE');
+    }
+
+    public function visiteur()
+    {
+        return $this->belongsTo(Visiteur::class, 'VIS_MATRICULE');
+    }
 }

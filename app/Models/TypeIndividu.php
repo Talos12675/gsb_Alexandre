@@ -11,27 +11,27 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class TypeIndividu
- * 
+ *
  * @property string $TIN_CODE
  * @property string $TIN_LIBELLE
- * 
  * @property Collection|Prescrire[] $prescrires
- *
- * @package App\Models
  */
 class TypeIndividu extends Model
 {
-	protected $table = 'type_individu';
-	protected $primaryKey = 'TIN_CODE';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'type_individu';
 
-	protected $fillable = [
-		'TIN_LIBELLE'
-	];
+    protected $primaryKey = 'TIN_CODE';
 
-	public function prescrires()
-	{
-		return $this->hasMany(Prescrire::class, 'TIN_CODE');
-	}
+    public $incrementing = false;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'TIN_LIBELLE',
+    ];
+
+    public function prescrires()
+    {
+        return $this->hasMany(Prescrire::class, 'TIN_CODE');
+    }
 }

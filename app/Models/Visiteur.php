@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 
 /**
  * Class Visiteur
- * 
+ *
  * @property string $VIS_MATRICULE
  * @property string $VIS_NOM
  * @property string|null $Vis_PRENOM
@@ -23,80 +23,81 @@ use Illuminate\Support\Facades\Hash;
  * @property Carbon|null $VIS_DATEEMBAUCHE
  * @property string|null $SEC_CODE
  * @property string|null $LAB_CODE
- * 
  * @property Labo|null $labo
  * @property Secteur|null $secteur
  * @property Collection|Offrir[] $offrirs
  * @property Collection|RapportVisite[] $rapport_visites
  * @property Collection|Realiser[] $realisers
  * @property Collection|Travailler[] $travaillers
- *
- * @package App\Models
  */
 class Visiteur extends Model
 {
-	protected $table = 'visiteur';
-	protected $primaryKey = 'VIS_MATRICULE';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'visiteur';
 
-	protected $casts = [
-		'VIS_DATEEMBAUCHE' => 'datetime'
-	];
+    protected $primaryKey = 'VIS_MATRICULE';
 
-	protected $fillable = [
-		'VIS_NOM',
-		'Vis_PRENOM',
-		'VIS_ADRESSE',
-		'VIS_CP',
-		'VIS_VILLE',
-		'VIS_DATEEMBAUCHE',
-		'SEC_CODE',
-		'LAB_CODE',
-		'VIS_PASSWORD',
-	];
+    public $incrementing = false;
 
-	protected $hidden = [
-		'VIS_PASSWORD',
-	];
+    public $timestamps = false;
 
-	public function setVISPasswordAttribute($value)
-	{
-		// Store passwords hashed (but don't double-hash already hashed strings)
-		if ($value !== null && Hash::needsRehash($value)) {
-			$this->attributes['VIS_PASSWORD'] = Hash::make($value);
-		} else {
-			$this->attributes['VIS_PASSWORD'] = $value;
-		}
-	}
+    protected $casts = [
+        'VIS_DATEEMBAUCHE' => 'datetime',
+    ];
 
-	public function labo()
-	{
-		return $this->belongsTo(Labo::class, 'LAB_CODE');
-	}
+    protected $fillable = [
+        'VIS_MATRICULE',
+        'VIS_NOM',
+        'Vis_PRENOM',
+        'VIS_ADRESSE',
+        'VIS_CP',
+        'VIS_VILLE',
+        'VIS_DATEEMBAUCHE',
+        'SEC_CODE',
+        'LAB_CODE',
+        'VIS_PASSWORD',
+    ];
 
-	public function secteur()
-	{
-		return $this->belongsTo(Secteur::class, 'SEC_CODE');
-	}
+    protected $hidden = [
+        'VIS_PASSWORD',
+    ];
 
-	public function offrirs()
-	{
-		return $this->hasMany(Offrir::class, 'VIS_MATRICULE');
-	}
+    public function setVISPasswordAttribute($value)
+    {
+        // Store passwords hashed (but don't double-hash already hashed strings)
+        if ($value !== null && Hash::needsRehash($value)) {
+            $this->attributes['VIS_PASSWORD'] = Hash::make($value);
+        } else {
+            $this->attributes['VIS_PASSWORD'] = $value;
+        }
+    }
 
-	public function rapport_visites()
-	{
-		return $this->hasMany(RapportVisite::class, 'VIS_MATRICULE');
-	}
+    public function labo()
+    {
+        return $this->belongsTo(Labo::class, 'LAB_CODE');
+    }
 
-	public function realisers()
-	{
-		return $this->hasMany(Realiser::class, 'VIS_MATRICULE');
-	}
+    public function secteur()
+    {
+        return $this->belongsTo(Secteur::class, 'SEC_CODE');
+    }
 
-	public function travaillers()
-	{
-		return $this->hasMany(Travailler::class, 'VIS_MATRICULE');
-	}
+    public function offrirs()
+    {
+        return $this->hasMany(Offrir::class, 'VIS_MATRICULE');
+    }
+
+    public function rapport_visites()
+    {
+        return $this->hasMany(RapportVisite::class, 'VIS_MATRICULE');
+    }
+
+    public function realisers()
+    {
+        return $this->hasMany(Realiser::class, 'VIS_MATRICULE');
+    }
+
+    public function travaillers()
+    {
+        return $this->hasMany(Travailler::class, 'VIS_MATRICULE');
+    }
 }

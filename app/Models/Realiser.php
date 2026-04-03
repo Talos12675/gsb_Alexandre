@@ -10,38 +10,37 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Realiser
- * 
+ *
  * @property int $AC_NUM
  * @property string $VIS_MATRICULE
  * @property float $REA_MTTFRAIS
- * 
  * @property ActiviteCompl $activite_compl
  * @property Visiteur $visiteur
- *
- * @package App\Models
  */
 class Realiser extends Model
 {
-	protected $table = 'realiser';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'realiser';
 
-	protected $casts = [
-		'AC_NUM' => 'int',
-		'REA_MTTFRAIS' => 'float'
-	];
+    public $incrementing = false;
 
-	protected $fillable = [
-		'REA_MTTFRAIS'
-	];
+    public $timestamps = false;
 
-	public function activite_compl()
-	{
-		return $this->belongsTo(ActiviteCompl::class, 'AC_NUM');
-	}
+    protected $casts = [
+        'AC_NUM' => 'int',
+        'REA_MTTFRAIS' => 'float',
+    ];
 
-	public function visiteur()
-	{
-		return $this->belongsTo(Visiteur::class, 'VIS_MATRICULE');
-	}
+    protected $fillable = [
+        'REA_MTTFRAIS',
+    ];
+
+    public function activite_compl()
+    {
+        return $this->belongsTo(ActiviteCompl::class, 'AC_NUM');
+    }
+
+    public function visiteur()
+    {
+        return $this->belongsTo(Visiteur::class, 'VIS_MATRICULE');
+    }
 }

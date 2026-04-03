@@ -23,13 +23,6 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="RAP_DATE" class="form-label">Date</label>
-                        <input type="date" class="form-control" id="RAP_DATE" name="RAP_DATE" value="{{ old('RAP_DATE') }}" required>
-                        @error('RAP_DATE')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
                         <label for="RAP_MOTIF" class="form-label">Motif</label>
                         <input type="text" class="form-control" id="RAP_MOTIF" name="RAP_MOTIF" value="{{ old('RAP_MOTIF') }}" required>
                         @error('RAP_MOTIF')

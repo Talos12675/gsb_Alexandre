@@ -11,29 +11,29 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class TypePraticien
- * 
+ *
  * @property string $TYP_CODE
  * @property string $TYP_LIBELLE
  * @property string $TYP_LIEU
- * 
  * @property Collection|Praticien[] $praticiens
- *
- * @package App\Models
  */
 class TypePraticien extends Model
 {
-	protected $table = 'type_praticien';
-	protected $primaryKey = 'TYP_CODE';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'type_praticien';
 
-	protected $fillable = [
-		'TYP_LIBELLE',
-		'TYP_LIEU'
-	];
+    protected $primaryKey = 'TYP_CODE';
 
-	public function praticiens()
-	{
-		return $this->hasMany(Praticien::class, 'TYP_CODE');
-	}
+    public $incrementing = false;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'TYP_LIBELLE',
+        'TYP_LIEU',
+    ];
+
+    public function praticiens()
+    {
+        return $this->hasMany(Praticien::class, 'TYP_CODE');
+    }
 }

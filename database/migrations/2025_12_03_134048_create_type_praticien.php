@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-Schema::create('type_praticien', function (Blueprint $table) {
-    $table->string('TYP_CODE', 3)->primary();
-    $table->string('TYP_LIBELLE', 25);
-    $table->string('TYP_LIEU', 35);
-});
+        Schema::create('type_praticien', function (Blueprint $table) {
+            $table->string('TYP_CODE', 3)->primary();
+            $table->string('TYP_LIBELLE', 25);
+            $table->string('TYP_LIEU', 35);
+        });
 
     }
 

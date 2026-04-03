@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\RapportVisiteController;
-use App\Http\Controllers\PraticienController;
 use App\Http\Controllers\MedicamentController;
+use App\Http\Controllers\PraticienController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RapportVisiteController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('login');

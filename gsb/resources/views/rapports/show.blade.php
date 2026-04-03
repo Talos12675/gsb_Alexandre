@@ -17,6 +17,8 @@
                     </div>
                     <div class="col-md-6">
                         <p><strong>Motif:</strong> {{ $rapport->RAP_MOTIF }}</p>
+                        <p><strong>Créé le:</strong> {{ $rapport->created_at ? \Carbon\Carbon::parse($rapport->created_at)->format('d/m/Y à H:i:s') : 'N/A' }}</p>
+                        <p><strong>Modifié le:</strong> {{ $rapport->updated_at ? \Carbon\Carbon::parse($rapport->updated_at)->format('d/m/Y à H:i:s') : 'N/A' }}</p>
                     </div>
                 </div>
                 <div class="mt-3">

@@ -11,29 +11,29 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Dosage
- * 
+ *
  * @property string $DOS_CODE
  * @property string $DOS_QUANTITE
  * @property string $DOS_UNITE
- * 
  * @property Collection|Prescrire[] $prescrires
- *
- * @package App\Models
  */
 class Dosage extends Model
 {
-	protected $table = 'dosage';
-	protected $primaryKey = 'DOS_CODE';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'dosage';
 
-	protected $fillable = [
-		'DOS_QUANTITE',
-		'DOS_UNITE'
-	];
+    protected $primaryKey = 'DOS_CODE';
 
-	public function prescrires()
-	{
-		return $this->hasMany(Prescrire::class, 'DOS_CODE');
-	}
+    public $incrementing = false;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'DOS_QUANTITE',
+        'DOS_UNITE',
+    ];
+
+    public function prescrires()
+    {
+        return $this->hasMany(Prescrire::class, 'DOS_CODE');
+    }
 }

@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-Schema::create('switchboard items', function (Blueprint $table) {
-    $table->integer('SwitchboardID');
-    $table->smallInteger('ItemNumber');
-    $table->string('ItemText', 255)->nullable();
-    $table->smallInteger('Command')->nullable();
-    $table->string('Argument', 255)->nullable();
-});
+        Schema::create('switchboard items', function (Blueprint $table) {
+            $table->integer('SwitchboardID');
+            $table->smallInteger('ItemNumber');
+            $table->string('ItemText', 255)->nullable();
+            $table->smallInteger('Command')->nullable();
+            $table->string('Argument', 255)->nullable();
+        });
 
     }
 

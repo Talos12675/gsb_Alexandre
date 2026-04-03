@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-Schema::create('realiser', function (Blueprint $table) {
-     $table->unsignedInteger('AC_NUM');
-     $table->string('VIS_MATRICULE', 10);
-     $table->float('REA_MTTFRAIS');
-     $table->primary(['AC_NUM','VIS_MATRICULE']);
-     $table->foreign('AC_NUM')->references('AC_NUM')->on('activite_compl');
-     $table->foreign('VIS_MATRICULE')->references('VIS_MATRICULE')->on('visiteur');
- });
+        Schema::create('realiser', function (Blueprint $table) {
+            $table->unsignedInteger('AC_NUM');
+            $table->string('VIS_MATRICULE', 10);
+            $table->float('REA_MTTFRAIS');
+            $table->primary(['AC_NUM', 'VIS_MATRICULE']);
+            $table->foreign('AC_NUM')->references('AC_NUM')->on('activite_compl');
+            $table->foreign('VIS_MATRICULE')->references('VIS_MATRICULE')->on('visiteur');
+        });
 
     }
 

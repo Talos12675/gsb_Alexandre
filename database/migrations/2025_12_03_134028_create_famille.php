@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-Schema::create('famille', function (Blueprint $table) {
-    $table->string('FAM_CODE', 3)->primary();
-    $table->string('FAM_LIBELLE', 80);
-});
+        Schema::create('famille', function (Blueprint $table) {
+            $table->string('FAM_CODE', 3)->primary();
+            $table->string('FAM_LIBELLE', 80);
+        });
 
     }
 

@@ -4,41 +4,51 @@ namespace App\Http\Controllers;
 
 use App\Models\Medicament;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class MedicamentController extends Controller
 {
     public function index(Request $request)
     {
-        if (!session('loggedin')) {
+        if (! session('loggedin')) {
             return redirect('/login');
         }
-        
+
         $query = Medicament::query();
-        
-        if ($request->has('search') && !empty($request->search)) {
+
+        if ($request->has('search') && ! empty($request->search)) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('MED_NOMCOMMERCIAL', 'LIKE', "%{$search}%")
-                  ->orWhere('MED_COMPOSITION', 'LIKE', "%{$search}%")
-                  ->orWhere('MED_EFFETS', 'LIKE', "%{$search}%")
-                  ->orWhere('FAM_CODE', 'LIKE', "%{$search}%");
+                    ->orWhere('MED_COMPOSITION', 'LIKE', "%{$search}%")
+                    ->orWhere('MED_EFFETS', 'LIKE', "%{$search}%")
+                    ->orWhere('FAM_CODE', 'LIKE', "%{$search}%");
             });
         }
-        
+
         $medicaments = $query->get();
+
         return view('medicaments.index', compact('medicaments'));
     }
 
     public function create()
     {
+        if (! session('loggedin') || ! session('is_admin')) {
+            return redirect()->route('dashboard')->with('error', 'Accès réservé aux administrateurs.');
+        }
+
         return view('medicaments.create');
     }
 
     public function store(Request $request)
     {
+        if (! session('loggedin') || ! session('is_admin')) {
+            return redirect()->route('dashboard')->with('error', 'Accès réservé aux administrateurs.');
+        }
+
         $request->validate([
             'MED_NOMCOMMERCIAL' => 'required|string|max:25',
-            'MED_DEPOTLEGAL' => 'required|string|max:10|unique:medicament,MED_DEPOTLEGAL',
+            'MED_DEPOTLEGAL' => 'nullable|string|max:10|unique:medicament,MED_DEPOTLEGAL',
             'FAM_CODE' => 'required|string|max:3',
             'MED_COMPOSITION' => 'nullable|string',
             'MED_EFFETS' => 'nullable|string',
@@ -46,26 +56,47 @@ class MedicamentController extends Controller
             'MED_PRIXECHANTILLON' => 'nullable|numeric',
         ]);
 
-        Medicament::create($request->all());
+        $data = $request->only(['MED_NOMCOMMERCIAL', 'MED_DEPOTLEGAL', 'FAM_CODE', 'MED_COMPOSITION', 'MED_EFFETS', 'MED_CONTREINDIC', 'MED_PRIXECHANTILLON']);
+
+        if (empty($data['MED_DEPOTLEGAL'])) {
+            do {
+                $depotLegal = 'M'.strtoupper(Str::random(9));
+            } while (Medicament::where('MED_DEPOTLEGAL', $depotLegal)->exists());
+            $data['MED_DEPOTLEGAL'] = $depotLegal;
+        }
+
+        Medicament::create($data);
 
         return redirect()->route('medicaments.index')->with('success', 'Médicament créé avec succès.');
     }
 
     public function show(Medicament $medicament)
     {
+        if (! session('loggedin')) {
+            return redirect('/login');
+        }
+
         return view('medicaments.show', compact('medicament'));
     }
 
     public function edit(Medicament $medicament)
     {
+        if (! session('loggedin') || ! session('is_admin')) {
+            return redirect()->route('dashboard')->with('error', 'Accès réservé aux administrateurs.');
+        }
+
         return view('medicaments.edit', compact('medicament'));
     }
 
     public function update(Request $request, Medicament $medicament)
     {
+        if (! session('loggedin') || ! session('is_admin')) {
+            return redirect()->route('dashboard')->with('error', 'Accès réservé aux administrateurs.');
+        }
+
         $request->validate([
             'MED_NOMCOMMERCIAL' => 'required|string|max:25',
-            'MED_DEPOTLEGAL' => 'required|string|max:10|unique:medicament,MED_DEPOTLEGAL,' . $medicament->MED_DEPOTLEGAL . ',MED_DEPOTLEGAL',
+            'MED_DEPOTLEGAL' => 'required|string|max:10|unique:medicament,MED_DEPOTLEGAL,'.$medicament->MED_DEPOTLEGAL.',MED_DEPOTLEGAL',
             'FAM_CODE' => 'required|string|max:3',
             'MED_COMPOSITION' => 'nullable|string',
             'MED_EFFETS' => 'nullable|string',
@@ -80,7 +111,12 @@ class MedicamentController extends Controller
 
     public function destroy(Medicament $medicament)
     {
+        if (! session('loggedin') || ! session('is_admin')) {
+            return redirect()->route('dashboard')->with('error', 'Accès réservé aux administrateurs.');
+        }
+
         $medicament->delete();
+
         return redirect()->route('medicaments.index')->with('success', 'Médicament supprimé avec succès.');
     }
 }

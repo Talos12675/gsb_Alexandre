@@ -423,6 +423,11 @@
             <a class="nav-link {{ request()->routeIs('medicaments.*') ? 'active' : '' }}" href="{{ route('medicaments.index') }}">
                 <i class="fas fa-pills"></i> Médicaments
             </a>
+            @if(session('is_admin'))
+                <a class="nav-link {{ request()->routeIs('journal-connections.index') ? 'active' : '' }}" href="{{ route('journal-connections.index') }}">
+                    <i class="fas fa-history"></i> Journal des connexions
+                </a>
+            @endif
             <a class="nav-link {{ request()->routeIs('profile.edit') ? 'active' : '' }}" href="{{ route('profile.edit') }}">
                 <i class="fas fa-user"></i> Mon Profil
             </a>
@@ -432,6 +437,16 @@
     <!-- Contenu principal -->
     <div class="main-content">
         <div class="container-fluid">
+            @if(session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
             @yield('content')
         </div>
     </div>

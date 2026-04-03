@@ -10,40 +10,39 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Posseder
- * 
+ *
  * @property int $PRA_NUM
  * @property string $SPE_CODE
  * @property string $POS_DIPLOME
  * @property float $POS_COEFPRESCRIPTION
- * 
  * @property Praticien $praticien
  * @property Specialite $specialite
- *
- * @package App\Models
  */
 class Posseder extends Model
 {
-	protected $table = 'posseder';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'posseder';
 
-	protected $casts = [
-		'PRA_NUM' => 'int',
-		'POS_COEFPRESCRIPTION' => 'float'
-	];
+    public $incrementing = false;
 
-	protected $fillable = [
-		'POS_DIPLOME',
-		'POS_COEFPRESCRIPTION'
-	];
+    public $timestamps = false;
 
-	public function praticien()
-	{
-		return $this->belongsTo(Praticien::class, 'PRA_NUM');
-	}
+    protected $casts = [
+        'PRA_NUM' => 'int',
+        'POS_COEFPRESCRIPTION' => 'float',
+    ];
 
-	public function specialite()
-	{
-		return $this->belongsTo(Specialite::class, 'SPE_CODE');
-	}
+    protected $fillable = [
+        'POS_DIPLOME',
+        'POS_COEFPRESCRIPTION',
+    ];
+
+    public function praticien()
+    {
+        return $this->belongsTo(Praticien::class, 'PRA_NUM');
+    }
+
+    public function specialite()
+    {
+        return $this->belongsTo(Specialite::class, 'SPE_CODE');
+    }
 }

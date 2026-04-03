@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\RapportVisiteController;
-use App\Http\Controllers\PraticienController;
 use App\Http\Controllers\MedicamentController;
+use App\Http\Controllers\PraticienController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RapportVisiteController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -21,6 +21,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('web')->group(function () {
     Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/journal-connections', [App\Http\Controllers\JournalConnexionController::class, 'index'])->name('journal-connections.index');
     Route::resource('rapports', RapportVisiteController::class);
     Route::get('/rapports/{id}/pdf', [RapportVisiteController::class, 'exportPdf'])->name('rapports.pdf');
     Route::resource('praticiens', PraticienController::class);

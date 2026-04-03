@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 use App\Models\Visiteur;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -31,6 +30,7 @@ class LoginController extends Controller
                 'nom' => $visiteur->VIS_NOM,
                 'prenom' => $visiteur->VIS_PRENOM,
             ]);
+
             return redirect()->route('dashboard');
         }
 
@@ -42,6 +42,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         session()->forget(['loggedin', 'matricule', 'nom', 'prenom']);
+
         return redirect('/');
     }
 }

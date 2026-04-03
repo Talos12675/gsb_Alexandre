@@ -6,7 +6,9 @@
         <div class="card">
             <div class="card-header">
                 <h2>Médicaments</h2>
-                <a href="{{ route('medicaments.create') }}" class="btn btn-primary">Nouveau Médicament</a>
+                @if(session('is_admin'))
+                    <a href="{{ route('medicaments.create') }}" class="btn btn-primary">Nouveau Médicament</a>
+                @endif
             </div>
             <div class="card-body">
                 <!-- Formulaire de recherche -->
@@ -44,12 +46,14 @@
                                 <td>{{ $medicament->MED_PRIXECHANTILLON ? number_format($medicament->MED_PRIXECHANTILLON, 2) . ' €' : 'N/A' }}</td>
                                 <td>
                                     <a href="{{ route('medicaments.show', $medicament) }}" class="btn btn-sm btn-outline-primary">Voir</a>
-                                    <a href="{{ route('medicaments.edit', $medicament) }}" class="btn btn-sm btn-outline-secondary">Éditer</a>
-                                    <form method="POST" action="{{ route('medicaments.destroy', $medicament) }}" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Êtes-vous sûr?')">Supprimer</button>
-                                    </form>
+                                    @if(session('is_admin'))
+                                        <a href="{{ route('medicaments.edit', $medicament) }}" class="btn btn-sm btn-outline-secondary">Éditer</a>
+                                        <form method="POST" action="{{ route('medicaments.destroy', $medicament) }}" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Êtes-vous sûr?')">Supprimer</button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

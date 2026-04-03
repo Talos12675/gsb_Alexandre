@@ -11,29 +11,29 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Labo
- * 
+ *
  * @property string $LAB_CODE
  * @property string $LAB_NOM
  * @property string $LAB_CHEFVENTE
- * 
  * @property Collection|Visiteur[] $visiteurs
- *
- * @package App\Models
  */
 class Labo extends Model
 {
-	protected $table = 'labo';
-	protected $primaryKey = 'LAB_CODE';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'labo';
 
-	protected $fillable = [
-		'LAB_NOM',
-		'LAB_CHEFVENTE'
-	];
+    protected $primaryKey = 'LAB_CODE';
 
-	public function visiteurs()
-	{
-		return $this->hasMany(Visiteur::class, 'LAB_CODE');
-	}
+    public $incrementing = false;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'LAB_NOM',
+        'LAB_CHEFVENTE',
+    ];
+
+    public function visiteurs()
+    {
+        return $this->hasMany(Visiteur::class, 'LAB_CODE');
+    }
 }

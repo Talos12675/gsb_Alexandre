@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-Schema::create('region', function (Blueprint $table) {
-    $table->string('REG_CODE', 2)->primary();
-    $table->string('SEC_CODE', 1);
-    $table->string('REG_NOM', 50);
-    $table->foreign('SEC_CODE')->references('SEC_CODE')->on('secteur');
-});
+        Schema::create('region', function (Blueprint $table) {
+            $table->string('REG_CODE', 2)->primary();
+            $table->string('SEC_CODE', 1);
+            $table->string('REG_NOM', 50);
+            $table->foreign('SEC_CODE')->references('SEC_CODE')->on('secteur');
+        });
 
     }
 

@@ -11,35 +11,35 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Region
- * 
+ *
  * @property string $REG_CODE
  * @property string $SEC_CODE
  * @property string $REG_NOM
- * 
  * @property Secteur $secteur
  * @property Collection|Travailler[] $travaillers
- *
- * @package App\Models
  */
 class Region extends Model
 {
-	protected $table = 'region';
-	protected $primaryKey = 'REG_CODE';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'region';
 
-	protected $fillable = [
-		'SEC_CODE',
-		'REG_NOM'
-	];
+    protected $primaryKey = 'REG_CODE';
 
-	public function secteur()
-	{
-		return $this->belongsTo(Secteur::class, 'SEC_CODE');
-	}
+    public $incrementing = false;
 
-	public function travaillers()
-	{
-		return $this->hasMany(Travailler::class, 'REG_CODE');
-	}
+    public $timestamps = false;
+
+    protected $fillable = [
+        'SEC_CODE',
+        'REG_NOM',
+    ];
+
+    public function secteur()
+    {
+        return $this->belongsTo(Secteur::class, 'SEC_CODE');
+    }
+
+    public function travaillers()
+    {
+        return $this->hasMany(Travailler::class, 'REG_CODE');
+    }
 }

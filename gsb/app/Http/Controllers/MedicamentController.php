@@ -9,23 +9,24 @@ class MedicamentController extends Controller
 {
     public function index(Request $request)
     {
-        if (!session('loggedin')) {
+        if (! session('loggedin')) {
             return redirect('/login');
         }
-        
+
         $query = Medicament::query();
-        
-        if ($request->has('search') && !empty($request->search)) {
+
+        if ($request->has('search') && ! empty($request->search)) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('MED_NOMCOMMERCIAL', 'LIKE', "%{$search}%")
-                  ->orWhere('MED_COMPOSITION', 'LIKE', "%{$search}%")
-                  ->orWhere('MED_EFFETS', 'LIKE', "%{$search}%")
-                  ->orWhere('FAM_CODE', 'LIKE', "%{$search}%");
+                    ->orWhere('MED_COMPOSITION', 'LIKE', "%{$search}%")
+                    ->orWhere('MED_EFFETS', 'LIKE', "%{$search}%")
+                    ->orWhere('FAM_CODE', 'LIKE', "%{$search}%");
             });
         }
-        
+
         $medicaments = $query->paginate(10);
+
         return view('medicaments.index', compact('medicaments'));
     }
 
@@ -65,7 +66,7 @@ class MedicamentController extends Controller
     {
         $request->validate([
             'MED_NOMCOMMERCIAL' => 'required|string|max:25',
-            'MED_DEPOTLEGAL' => 'required|string|max:10|unique:medicament,MED_DEPOTLEGAL,' . $medicament->MED_DEPOTLEGAL . ',MED_DEPOTLEGAL',
+            'MED_DEPOTLEGAL' => 'required|string|max:10|unique:medicament,MED_DEPOTLEGAL,'.$medicament->MED_DEPOTLEGAL.',MED_DEPOTLEGAL',
             'FAM_CODE' => 'required|string|max:3',
             'MED_COMPOSITION' => 'nullable|string',
             'MED_EFFETS' => 'nullable|string',
@@ -81,6 +82,7 @@ class MedicamentController extends Controller
     public function destroy(Medicament $medicament)
     {
         $medicament->delete();
+
         return redirect()->route('medicaments.index')->with('success', 'Médicament supprimé avec succès.');
     }
 }

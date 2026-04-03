@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Employe
- * 
+ *
  * @property int $id
  * @property string $matricule
  * @property string $nom
@@ -20,25 +20,24 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $code_postal
  * @property string $ville
  * @property Carbon $date_embauche
- *
- * @package App\Models
  */
 class Employe extends Model
 {
-	protected $table = 'employes';
-	public $timestamps = false;
+    protected $table = 'employes';
 
-	protected $casts = [
-		'date_embauche' => 'datetime'
-	];
+    public $timestamps = false;
 
-	protected $fillable = [
-		'matricule',
-		'nom',
-		'prenom',
-		'adresse',
-		'code_postal',
-		'ville',
-		'date_embauche'
-	];
+    protected $casts = [
+        'date_embauche' => 'datetime',
+    ];
+
+    protected $fillable = [
+        'matricule',
+        'nom',
+        'prenom',
+        'adresse',
+        'code_postal',
+        'ville',
+        'date_embauche',
+    ];
 }

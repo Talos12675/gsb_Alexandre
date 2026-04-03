@@ -96,6 +96,14 @@
             <label>Motif :</label>
             <span>{{ $rapport->RAP_MOTIF }}</span>
         </div>
+        <div class="field">
+            <label>Créé le :</label>
+            <span>{{ $rapport->created_at ? \Carbon\Carbon::parse($rapport->created_at)->format('d/m/Y H:i:s') : 'N/A' }}</span>
+        </div>
+        <div class="field">
+            <label>Modifié le :</label>
+            <span>{{ $rapport->updated_at ? \Carbon\Carbon::parse($rapport->updated_at)->format('d/m/Y H:i:s') : 'N/A' }}</span>
+        </div>
     </div>
 
     <div class="section">

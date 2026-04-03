@@ -11,33 +11,33 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Secteur
- * 
+ *
  * @property string $SEC_CODE
  * @property string $SEC_LIBELLE
- * 
  * @property Collection|Region[] $regions
  * @property Collection|Visiteur[] $visiteurs
- *
- * @package App\Models
  */
 class Secteur extends Model
 {
-	protected $table = 'secteur';
-	protected $primaryKey = 'SEC_CODE';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'secteur';
 
-	protected $fillable = [
-		'SEC_LIBELLE'
-	];
+    protected $primaryKey = 'SEC_CODE';
 
-	public function regions()
-	{
-		return $this->hasMany(Region::class, 'SEC_CODE');
-	}
+    public $incrementing = false;
 
-	public function visiteurs()
-	{
-		return $this->hasMany(Visiteur::class, 'SEC_CODE');
-	}
+    public $timestamps = false;
+
+    protected $fillable = [
+        'SEC_LIBELLE',
+    ];
+
+    public function regions()
+    {
+        return $this->hasMany(Region::class, 'SEC_CODE');
+    }
+
+    public function visiteurs()
+    {
+        return $this->hasMany(Visiteur::class, 'SEC_CODE');
+    }
 }

@@ -10,45 +10,44 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Offrir
- * 
+ *
  * @property string $VIS_MATRICULE
  * @property int $RAP_NUM
  * @property string $MED_DEPOTLEGAL
  * @property int|null $OFF_QTE
- * 
  * @property Medicament $medicament
  * @property RapportVisite $rapport_visite
  * @property Visiteur $visiteur
- *
- * @package App\Models
  */
 class Offrir extends Model
 {
-	protected $table = 'offrir';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'offrir';
 
-	protected $casts = [
-		'RAP_NUM' => 'int',
-		'OFF_QTE' => 'int'
-	];
+    public $incrementing = false;
 
-	protected $fillable = [
-		'OFF_QTE'
-	];
+    public $timestamps = false;
 
-	public function medicament()
-	{
-		return $this->belongsTo(Medicament::class, 'MED_DEPOTLEGAL');
-	}
+    protected $casts = [
+        'RAP_NUM' => 'int',
+        'OFF_QTE' => 'int',
+    ];
 
-	public function rapport_visite()
-	{
-		return $this->belongsTo(RapportVisite::class, 'RAP_NUM');
-	}
+    protected $fillable = [
+        'OFF_QTE',
+    ];
 
-	public function visiteur()
-	{
-		return $this->belongsTo(Visiteur::class, 'VIS_MATRICULE');
-	}
+    public function medicament()
+    {
+        return $this->belongsTo(Medicament::class, 'MED_DEPOTLEGAL');
+    }
+
+    public function rapport_visite()
+    {
+        return $this->belongsTo(RapportVisite::class, 'RAP_NUM');
+    }
+
+    public function visiteur()
+    {
+        return $this->belongsTo(Visiteur::class, 'VIS_MATRICULE');
+    }
 }

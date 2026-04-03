@@ -9,23 +9,24 @@ class PraticienController extends Controller
 {
     public function index(Request $request)
     {
-        if (!session('loggedin')) {
+        if (! session('loggedin')) {
             return redirect('/login');
         }
-        
+
         $query = Praticien::query();
-        
-        if ($request->has('search') && !empty($request->search)) {
+
+        if ($request->has('search') && ! empty($request->search)) {
             $search = $request->search;
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('PRA_NOM', 'LIKE', "%{$search}%")
-                  ->orWhere('PRA_PRENOM', 'LIKE', "%{$search}%")
-                  ->orWhere('PRA_VILLE', 'LIKE', "%{$search}%")
-                  ->orWhere('TYP_CODE', 'LIKE', "%{$search}%");
+                    ->orWhere('PRA_PRENOM', 'LIKE', "%{$search}%")
+                    ->orWhere('PRA_VILLE', 'LIKE', "%{$search}%")
+                    ->orWhere('TYP_CODE', 'LIKE', "%{$search}%");
             });
         }
-        
+
         $praticiens = $query->paginate(10);
+
         return view('praticiens.index', compact('praticiens'));
     }
 
@@ -81,6 +82,7 @@ class PraticienController extends Controller
     public function destroy(Praticien $praticien)
     {
         $praticien->delete();
+
         return redirect()->route('praticiens.index')->with('success', 'Praticien supprimé avec succès.');
     }
 }

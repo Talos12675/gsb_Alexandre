@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-Schema::create('medicament', function (Blueprint $table) {
-    $table->string('MED_DEPOTLEGAL', 10)->primary();
-    $table->string('MED_NOMCOMMERCIAL', 25);
-    $table->string('FAM_CODE', 3);
-    $table->string('MED_COMPOSITION', 255);
-    $table->string('MED_EFFETS', 255);
-    $table->string('MED_CONTREINDIC', 255);
-    $table->float('MED_PRIXECHANTILLON');
-    $table->foreign('FAM_CODE')->references('FAM_CODE')->on('famille')->onUpdate('cascade')->onDelete('restrict');
-});
+        Schema::create('medicament', function (Blueprint $table) {
+            $table->string('MED_DEPOTLEGAL', 10)->primary();
+            $table->string('MED_NOMCOMMERCIAL', 25);
+            $table->string('FAM_CODE', 3);
+            $table->string('MED_COMPOSITION', 255);
+            $table->string('MED_EFFETS', 255);
+            $table->string('MED_CONTREINDIC', 255);
+            $table->float('MED_PRIXECHANTILLON');
+            $table->foreign('FAM_CODE')->references('FAM_CODE')->on('famille')->onUpdate('cascade')->onDelete('restrict');
+        });
 
         // // Add foreign key to existing 'constituer' table now that 'medicament' exists
         // Schema::table('constituer', function (Blueprint $table) {

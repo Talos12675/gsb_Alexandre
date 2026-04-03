@@ -2,27 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\Visiteur;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
     public function edit()
     {
-        if (!session('loggedin')) {
+        if (! session('loggedin')) {
             return redirect('/login');
         }
-        
+
+        if (session('is_admin')) {
+            $user = User::find(session('user_id'));
+
+            return view('profile.edit', ['isAdmin' => true, 'user' => $user]);
+        }
+
         $visiteur = Visiteur::where('VIS_MATRICULE', session('matricule'))->first();
-        return view('profile.edit', compact('visiteur'));
+
+        return view('profile.edit', ['isAdmin' => false, 'visiteur' => $visiteur]);
     }
 
     public function update(Request $request)
     {
-        if (!session('loggedin')) {
+        if (! session('loggedin')) {
             return redirect('/login');
         }
-        
+
+        if (session('is_admin')) {
+            $user = User::findOrFail(session('user_id'));
+
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|max:255|unique:users,email,'.$user->id,
+                'password' => 'nullable|string|min:6|confirmed',
+            ]);
+
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+
+            if ($request->filled('password')) {
+                $user->password = Hash::make($request->input('password'));
+            }
+
+            $user->save();
+
+            return back()->with('success', 'Profil administrateur mis à jour avec succès.');
+        }
+
         $visiteur = Visiteur::where('VIS_MATRICULE', session('matricule'))->firstOrFail();
 
         $request->validate([

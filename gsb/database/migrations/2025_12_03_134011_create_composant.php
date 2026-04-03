@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-Schema::create('composant', function (Blueprint $table) {
-    $table->string('CMP_CODE', 4)->primary();
-    $table->string('CMP_LIBELLE', 25);
-});
+        Schema::create('composant', function (Blueprint $table) {
+            $table->string('CMP_CODE', 4)->primary();
+            $table->string('CMP_LIBELLE', 25);
+        });
 
     }
 

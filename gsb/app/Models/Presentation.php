@@ -11,27 +11,27 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Presentation
- * 
+ *
  * @property string $PRE_CODE
  * @property string $PRE_LIBELLE
- * 
  * @property Collection|Formuler[] $formulers
- *
- * @package App\Models
  */
 class Presentation extends Model
 {
-	protected $table = 'presentation';
-	protected $primaryKey = 'PRE_CODE';
-	public $incrementing = false;
-	public $timestamps = false;
+    protected $table = 'presentation';
 
-	protected $fillable = [
-		'PRE_LIBELLE'
-	];
+    protected $primaryKey = 'PRE_CODE';
 
-	public function formulers()
-	{
-		return $this->hasMany(Formuler::class, 'PRE_CODE');
-	}
+    public $incrementing = false;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'PRE_LIBELLE',
+    ];
+
+    public function formulers()
+    {
+        return $this->hasMany(Formuler::class, 'PRE_CODE');
+    }
 }
