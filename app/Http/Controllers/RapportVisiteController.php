@@ -9,15 +9,26 @@ use Illuminate\Http\Request;
 
 class RapportVisiteController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if (! session('loggedin')) {
             return redirect('/login');
         }
 
-        $rapports = RapportVisite::where('VIS_MATRICULE', session('matricule'))->with('praticien', 'visiteur')->get();
+        $sortBy = $request->query('sort_by', 'RAP_DATE');
+        $sortDir = $request->query('sort_dir', 'desc');
 
-        return view('rapports.index', compact('rapports'));
+        // Validate sort parameters for security
+        $allowedSorts = ['RAP_DATE', 'created_at', 'updated_at'];
+        $sortBy = in_array($sortBy, $allowedSorts) ? $sortBy : 'RAP_DATE';
+        $sortDir = in_array(strtolower($sortDir), ['asc', 'desc']) ? strtolower($sortDir) : 'desc';
+
+        $rapports = RapportVisite::where('VIS_MATRICULE', session('matricule'))
+            ->with('praticien', 'visiteur')
+            ->orderBy($sortBy, $sortDir)
+            ->get();
+
+        return view('rapports.index', compact('rapports', 'sortBy', 'sortDir'));
     }
 
     public function create()

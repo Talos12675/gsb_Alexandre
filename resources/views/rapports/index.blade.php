@@ -13,12 +13,33 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Date</th>
+                                <th>
+                                    <a href="{{ route('rapports.index', ['sort_by' => 'RAP_DATE', 'sort_dir' => $sortBy === 'RAP_DATE' && $sortDir === 'asc' ? 'desc' : 'asc']) }}" style="color: inherit; text-decoration: none;">
+                                        Date 
+                                        @if($sortBy === 'RAP_DATE')
+                                            <i class="bi bi-arrow-{{ $sortDir === 'asc' ? 'up' : 'down' }}"></i>
+                                        @endif
+                                    </a>
+                                </th>
                                 <th>Visiteur</th>
                                 <th>Praticien</th>
                                 <th>Bilan</th>
-                                <th>Créé le</th>
-                                <th>Modifié le</th>
+                                <th>
+                                    <a href="{{ route('rapports.index', ['sort_by' => 'created_at', 'sort_dir' => $sortBy === 'created_at' && $sortDir === 'asc' ? 'desc' : 'asc']) }}" style="color: inherit; text-decoration: none;">
+                                        Créé le 
+                                        @if($sortBy === 'created_at')
+                                            <i class="bi bi-arrow-{{ $sortDir === 'asc' ? 'up' : 'down' }}"></i>
+                                        @endif
+                                    </a>
+                                </th>
+                                <th>
+                                    <a href="{{ route('rapports.index', ['sort_by' => 'updated_at', 'sort_dir' => $sortBy === 'updated_at' && $sortDir === 'asc' ? 'desc' : 'asc']) }}" style="color: inherit; text-decoration: none;">
+                                        Modifié le 
+                                        @if($sortBy === 'updated_at')
+                                            <i class="bi bi-arrow-{{ $sortDir === 'asc' ? 'up' : 'down' }}"></i>
+                                        @endif
+                                    </a>
+                                </th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
