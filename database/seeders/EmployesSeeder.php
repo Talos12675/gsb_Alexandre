@@ -9,7 +9,7 @@ class EmployesSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('employes')->insert([
+        DB::table('employes')->upsert([
             [
                 'matricule' => 'EMP001',
                 'nom' => 'Dupont',
@@ -37,6 +37,6 @@ class EmployesSeeder extends Seeder
                 'ville' => 'Lyon',
                 'date_embauche' => '2021-06-10',
             ],
-        ]);
+        ], ['matricule'], ['nom', 'prenom', 'adresse', 'code_postal', 'ville', 'date_embauche']);
     }
 }

@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             EmployesSeeder::class,
             FamilleSeeder::class,
             LaboSeeder::class,
+            // Chargement des collaborateurs après l'insertion des laboratoires.
+            CollaborateurSeeder::class,
             SecteurSeeder::class,
             RegionSeeder::class,
             SpecialiteSeeder::class,

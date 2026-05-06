@@ -1,0 +1,51 @@
+Modifications Laboratoires - GSB
+
+1. app/Http/Controllers/LaboController.php
+   - Création du contrôleur de consultation des laboratoires.
+   - Ajout des méthodes index() et show().
+
+2. app/Models/Collaborateur.php
+   - Création du modèle Collaborateur.
+   - Définition de la relation belongsTo vers Labo.
+
+3. app/Models/Labo.php
+   - Ajout des champs administratifs au fillable.
+   - Ajout de la relation collaborateurs().
+
+4. routes/web.php
+   - Ajout de l'import LaboController.
+   - Définition des routes resource('laboratoires') pour index et show.
+
+5. resources/views/layouts/app.blade.php
+   - Ajout du lien de menu Laboratoires dans la sidebar.
+
+6. resources/views/laboratoires/index.blade.php
+   - Création de la page de liste des laboratoires.
+   - Ajout des colonnes Code postal et Téléphone siège.
+
+7. resources/views/laboratoires/show.blade.php
+   - Création de la fiche de détail d'un laboratoire avec collaborateurs.
+   - Organisation des informations générales et administratives sous forme de tableaux.
+
+8. database/migrations/2026_05_06_000000_add_contact_fields_to_labo_table.php
+   - Ajout des colonnes LAB_EMAIL, LAB_ADRESSE, LAB_CP, LAB_VILLE, LAB_TELEPHONE.
+   - Migration rendue idempotente en vérifiant l'existence de chaque colonne avant ajout.
+
+9. database/migrations/2026_05_06_000001_create_collaborateurs_table.php
+   - Création de la table collaborateur avec la clé étrangère LAB_CODE.
+
+10. database/seeders/LaboSeeder.php
+    - Ajout de données administratives pour chaque laboratoire seed.
+
+11. database/seeders/CollaborateurSeeder.php
+    - Création du seeder de collaborateurs par laboratoire.
+    - Ajout de collaborateurs supplémentaires pour BC, GY et SW afin d'afficher des données sur la fiche laboratoire.
+
+13. database/seeders/DatabaseSeeder.php
+    - Ajout de l'appel à CollaborateurSeeder après LaboSeeder.
+
+14. database/seeders/EmployesSeeder.php
+    - Passage de insert() à upsert() pour éviter les doublons lorsque les seeders sont relancés.
+
+15. database/seeders/FamilleSeeder.php
+    - Passage de insert() à upsert() pour éviter l'erreur de doublons sur le code primaire FAM_CODE.

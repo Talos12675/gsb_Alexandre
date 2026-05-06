@@ -9,7 +9,7 @@ class FamilleSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('famille')->insert([
+        DB::table('famille')->upsert([
             ['FAM_CODE' => 'AA', 'FAM_LIBELLE' => 'Antalgiques en association'],
             ['FAM_CODE' => 'AAA', 'FAM_LIBELLE' => 'Antalgiques antipyrétiques en association'],
             ['FAM_CODE' => 'AAC', 'FAM_LIBELLE' => 'Antidépresseur d\'action centrale'],
@@ -30,6 +30,6 @@ class FamilleSeeder extends Seeder
             ['FAM_CODE' => 'CRT', 'FAM_LIBELLE' => 'Corticoïde, antibiotique et antifongique à  usage local'],
             ['FAM_CODE' => 'HYP', 'FAM_LIBELLE' => 'Hypnotique antihistaminique'],
             ['FAM_CODE' => 'PSA', 'FAM_LIBELLE' => 'Psychostimulant, antiasthénique'],
-        ]);
+        ], ['FAM_CODE'], ['FAM_LIBELLE']);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaboController;
 use App\Http\Controllers\MedicamentController;
 use App\Http\Controllers\PraticienController;
 use App\Http\Controllers\ProfileController;
@@ -26,6 +27,8 @@ Route::middleware('web')->group(function () {
     Route::get('/rapports/{id}/pdf', [RapportVisiteController::class, 'exportPdf'])->name('rapports.pdf');
     Route::resource('praticiens', PraticienController::class);
     Route::resource('medicaments', MedicamentController::class);
+    // Routes pour le nouveau menu Laboratoires : liste et fiche détail.
+    Route::resource('laboratoires', LaboController::class)->only(['index', 'show']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });

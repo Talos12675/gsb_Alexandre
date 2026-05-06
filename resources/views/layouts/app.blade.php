@@ -420,6 +420,10 @@
             <a class="nav-link {{ request()->routeIs('praticiens.*') ? 'active' : '' }}" href="{{ route('praticiens.index') }}">
                 <i class="fas fa-user-md"></i> Praticiens
             </a>
+            <!-- Lien ajouté pour accéder au nouveau menu Laboratoires -->
+            <a class="nav-link {{ request()->routeIs('laboratoires.*') ? 'active' : '' }}" href="{{ route('laboratoires.index') }}">
+                <i class="fas fa-flask"></i> Laboratoires
+            </a>
             <a class="nav-link {{ request()->routeIs('medicaments.*') ? 'active' : '' }}" href="{{ route('medicaments.index') }}">
                 <i class="fas fa-pills"></i> Médicaments
             </a>
